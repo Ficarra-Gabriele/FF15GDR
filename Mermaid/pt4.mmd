@@ -1,0 +1,166 @@
+---
+config:
+  theme: dark
+  themeVariables:
+    fontFamily: ''
+    mainBkg: '#0a0b0d'
+    textColor: '#e0e0e0'
+    primaryColor: '#1c1e22'
+    primaryTextColor: '#d4af37'
+    primaryBorderColor: '#d4af37'
+    lineColor: '#4a90e2'
+    secondaryColor: '#15171a'
+    tertiaryColor: '#050505'
+    nodeBorder: '#8e8e8e'
+    clusterBkg: '#0f1113'
+    titleColor: '#4a90e2'
+  layout: elk
+---
+classDiagram
+direction TB
+    class IEntitaDanneggiabile {
+	    +riceviDanno(quantita: int)
+	    +isVivo() boolean
+	    +getHp() int
+    }
+
+    class PersonaggioBase {
+	    #int hp
+	    #int hpMax
+	    #int dif
+	    #int difMax
+	    #int stamina
+	    #int staminaMax
+	    #int passiCompiuti
+	    #boolean parry
+	    #boolean haChocobo
+	    +PersonaggioBase()
+	    +riceviDanno(quantita: int)
+	    +usaPozione(Pozione p)
+	    +equipaggiaBandana(Bandana b)
+    }
+
+    class Noctis {
+	    -int mana
+	    -int manaMax
+	    +Noctis()
+	    +lanciaMagia(IEntitaDanneggiabile bersaglio)
+    }
+
+    class Prompto {
+	    -int aumentoStamina
+	    -boolean revolver
+	    +usaRevolver() boolean
+	    +Prompto()
+    }
+
+    class Gladiolus {
+	    -int aumentoVita
+	    -boolean scudoReale
+	    +usaScudoReale() boolean
+	    +Gladiolus()
+    }
+
+    class Ignis {
+	    +int aumentoDifesa
+	    +boolean raggruppa
+	    +usaRaggruppa() int
+	    +Ignis()
+    }
+
+    class GolemDiElisir {
+	    +avvelena()
+    }
+
+    class Cockatrice {
+	    +confondi()
+    }
+
+    class GrandePolloRosa {
+	    +fattiCoccolare()
+	    +sottraiStamina()
+    }
+
+    class GrandeRospoAzzurro {
+	    +spingiIndietro()
+    }
+
+    class Ardin {
+	    -boolean specialeDisponibile
+	    -int aumentaDanno
+	    +attacco(IEntitaDanneggiabile bersaglio)
+    }
+
+    class Boss {
+	    - int moltiplicatoreDanno
+	    + aumentoDanno()
+    }
+
+    class Pozione {
+	    -String tipoStat
+	    -int potenza
+	    -boolean raccoglibile
+	    +getTipoStat() String
+	    +getPotenza() int
+    }
+
+    class Bandana {
+	    -int bonusDif
+	    -int bonusAtk
+    }
+
+    class GestoreEventi {
+	    -int passiTarget
+	    +eseguiTurnoEsplorazione()
+    }
+
+    class FileManager {
+	    +salvaCSV(PersonaggioBase p)
+	    +caricaCSV() PersonaggioBase
+    }
+
+    class Oggetto {
+    }
+
+    class Nemico {
+	    #String nome
+	    #int hp
+	    #int danno
+	    +Nemico()
+	    +eseguiMossa(IEntitaDanneggiabile bersaglio)
+    }
+
+    class TurnManager {
+	    -int turnoCorrente
+	    +prossimoTurno()
+	    +iniziaBattaglia()
+    }
+
+    class GameManager {
+    }
+
+	<<interface>> IEntitaDanneggiabile
+	<<abstract>> PersonaggioBase
+	<<abstract>> Oggetto
+	<<abstract>> Nemico
+
+    PersonaggioBase "1" o-- "0..*" Oggetto : inventario
+    GolemDiElisir --|> Nemico
+    Cockatrice --|> Nemico
+    GrandePolloRosa --|> Nemico
+    GrandeRospoAzzurro --|> Nemico
+    Boss --|> Nemico
+    Ardin --|> Nemico
+    Noctis --|> PersonaggioBase
+    Prompto --|> PersonaggioBase
+    Ignis --|> PersonaggioBase
+    Gladiolus --|> PersonaggioBase
+    Nemico --|> IEntitaDanneggiabile
+    PersonaggioBase --|> IEntitaDanneggiabile
+    Pozione --|> Oggetto
+    Bandana --|> Oggetto
+    TurnManager <-- GestoreEventi
+    IEntitaDanneggiabile --> TurnManager
+    GameManager -- TurnManager
+    GameManager -- GestoreEventi
+    GameManager -- PersonaggioBase
