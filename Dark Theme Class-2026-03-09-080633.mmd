@@ -1,0 +1,127 @@
+---
+config:
+  theme: dark
+  themeVariables:
+    fontFamily: ''
+    mainBkg: '#0a0b0d'
+    textColor: '#e0e0e0'
+    primaryColor: '#1c1e22'
+    primaryTextColor: '#d4af37'
+    primaryBorderColor: '#d4af37'
+    lineColor: '#4a90e2'
+    secondaryColor: '#15171a'
+    tertiaryColor: '#050505'
+    nodeBorder: '#8e8e8e'
+    clusterBkg: '#0f1113'
+    titleColor: '#4a90e2'
+  layout: elk
+---
+classDiagram
+direction LR
+    class IEntitaDanneggiabile {
+	    +riceviDanno(quantita: int)
+	    +isVivo() boolean
+    }
+
+    class PersonaggioBase {
+	    #int hp
+	    #int hpMax
+	    #int dif
+	    #int difMax
+	    #int stamina
+	    #int staminaMax
+	    #int passiCompiuti
+	    #boolean parry
+	    #boolean haChocobo
+	    +PersonaggioBase()
+	    +riceviDanno(quantita: int)
+	    +usaPozione(Pozione p)
+	    +equipaggiaBandana(Bandana b)
+    }
+
+    class Noctis {
+	    -int mana
+	    -int manaMax
+	    +Noctis()
+	    +lanciaMagia(IEntitaDanneggiabile bersaglio)
+    }
+
+    class Nemico {
+	    -String nome
+	    -int hp
+	    -int dannoBase
+	    +Nemico(nome, hp, danno)
+	    +eseguiMossa(IEntitaDanneggiabile bersaglio)
+    }
+
+    class Prompto {
+	    -int moltiplicatoreStamina
+	    +Prompto()
+    }
+
+    class Gladiolus {
+	    -int moltiplicatoreVita
+	    +Gladiolus()
+    }
+
+    class Ignis {
+	    -int moltiplicatoreDifesa
+	    +Ignis()
+    }
+
+    class Ardin {
+	    -boolean specialeDisponibile
+	    +attacco(IEntitaDanneggiabile bersaglio)
+    }
+
+    class Boss {
+	    -int moltiplicatoreDanno
+    }
+
+    class Pozione {
+	    -String tipoStat
+	    -int potenza
+	    -boolean raccoglibile
+	    +getTipoStat() String
+	    +getPotenza() int
+    }
+
+    class Bandana {
+	    -int bonusDif
+	    -int bonusAtk
+    }
+
+    class GestoreEventi {
+	    -int passiTarget
+	    +eseguiTurnoEsplorazione()
+    }
+
+    class FileManager {
+	    +salvaCSV(Noctis n)
+	    +caricaCSV() Noctis
+    }
+
+    class NemicoNormale {
+    }
+
+    class Oggetto {
+    }
+
+	<<interface>> IEntitaDanneggiabile
+	<<abstract>> PersonaggioBase
+	<<abstract>> Nemico
+	<<abstract>> Oggetto
+
+    IEntitaDanneggiabile <|.. PersonaggioBase
+    IEntitaDanneggiabile <|.. Nemico
+    PersonaggioBase <|-- Noctis
+    Nemico <|-- Ardin
+    Nemico <|-- Boss
+    Nemico <|-- NemicoNormale
+    Oggetto <|-- Pozione : <br>
+    Oggetto <|-- Bandana : <br>
+    PersonaggioBase "0..*" --> "0..1" Oggetto : inventario
+    GestoreEventi -- IEntitaDanneggiabile
+    PersonaggioBase <|-- Ignis
+    PersonaggioBase <|-- Gladiolus
+    PersonaggioBase <|-- Prompto
