@@ -4,11 +4,13 @@
  */
 package ff;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author ficarra.gabriele
  */
-public abstract class PersonaggioBase {
+public abstract class PersonaggioBase implements IEntitaDanneggiabile {
 
     protected int hp;
     protected int hpMax;
@@ -19,6 +21,7 @@ public abstract class PersonaggioBase {
     protected int passicompiuti;
     protected boolean parry;
     protected boolean haIlChocobo;
+    protected ArrayList<Oggetto> inventario = new ArrayList<>();
 
     public PersonaggioBase() {
         this.hp = 15;
@@ -29,5 +32,14 @@ public abstract class PersonaggioBase {
         this.staminaMax = 10;
         this.passicompiuti = 0;
     }
-
+    
+    public void riceviDanno(int quantita){
+        
+    }
+    public void usaPozione(Pozione p){
+        
+    }
+    public void equipaggiaBandana(Bandana b){
+        
+    }
 }

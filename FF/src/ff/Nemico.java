@@ -8,7 +8,7 @@ package ff;
  *
  * @author ficarra.gabriele
  */
-public abstract class Nemico {
+public abstract class Nemico implements IEntitaDanneggiabile {
     
     protected String nome;
     protected int hp;
@@ -19,6 +19,9 @@ public abstract class Nemico {
         this.hp = hp;
         this.danno = danno;
     }
-            
+         
+    public void eseguiMossa(IEntitaDanneggiabile bersaglio){
+        
+    }
     
 }

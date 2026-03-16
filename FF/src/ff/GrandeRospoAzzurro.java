@@ -8,15 +8,7 @@ package ff;
  *
  * @author ficarra.gabriele
  */
-public class Ignis extends PersonaggioBase {
-    
-    private final int aumentoDifesa = 4;
-    
-    public Ignis(){
-        super();
-        this.dif += aumentoDifesa;
-        this.difMax += aumentoDifesa;
-    }
+public class GrandeRospoAzzurro extends Nemico {
 
     @Override
     public int getHp() {
@@ -32,4 +24,5 @@ public class Ignis extends PersonaggioBase {
     public boolean isVivo() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+    
 }
