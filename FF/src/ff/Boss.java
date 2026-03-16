@@ -10,6 +10,12 @@ package ff;
  */
 public class Boss extends Nemico {
 
+    private int moltiplicatoreDanno = 648; // il nemico normale fa 352 a colpo
+    public void aumentoDanno(Nemico n){
+       int danno = n.getDanno();
+       danno += moltiplicatoreDanno;
+    }
+            
     @Override
     public int getHp() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

@@ -10,6 +10,20 @@ package ff;
  */
 public class Ardin extends Nemico{
 
+    private boolean specialeDisponibile = true;
+    private int aumentaDanno;
+    
+    public void evocaIfrit(IEntitaDanneggiabile e ){
+        e.riceviDanni(3000);
+    } 
+    
+    private int moltiplicatoreDanno = 1000;
+    
+    public void aumentoDanno(Nemico n){
+       int danno = n.getDanno();
+       danno += moltiplicatoreDanno;
+    }
+    
     @Override
     public int getHp() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

@@ -20,6 +20,9 @@ public abstract class Nemico implements IEntitaDanneggiabile {
         this.danno = danno;
     }
          
+    public int getDanno(){
+        return danno;
+    }
     public void eseguiMossa(IEntitaDanneggiabile bersaglio){
         
     }
