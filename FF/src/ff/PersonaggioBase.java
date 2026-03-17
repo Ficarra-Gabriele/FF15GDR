@@ -19,19 +19,10 @@ public abstract class PersonaggioBase implements IEntitaDanneggiabile {
     protected int stamina;
     protected int staminaMax;
     protected int passicompiuti;
+    protected int danno;
     protected boolean parry;
     protected boolean haIlChocobo;
     protected ArrayList<Oggetto> inventario = new ArrayList<>();
-
-    public PersonaggioBase() {
-        this.hp = 15;
-        this.hpMax = 15;
-        this.dif = 5;
-        this.difMax = 5;
-        this.stamina = 10;
-        this.staminaMax = 10;
-        this.passicompiuti = 0;
-    }
     
     public void riceviDanno(int quantita){
         

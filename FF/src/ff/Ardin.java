@@ -14,7 +14,7 @@ public class Ardin extends Nemico{
     private int aumentaDanno;
     
     public void evocaIfrit(IEntitaDanneggiabile e ){
-        e.riceviDanni(3000);
+        e.riceviDanni(2500);
     } 
     
     private int moltiplicatoreDanno = 1000;

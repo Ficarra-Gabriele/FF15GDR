@@ -17,7 +17,7 @@ public abstract class Nemico implements IEntitaDanneggiabile {
     public Nemico() {
         this.nome = nome;
         this.hp = hp;
-        this.danno = danno;
+        this.danno = 352;
     }
          
     public int getDanno(){

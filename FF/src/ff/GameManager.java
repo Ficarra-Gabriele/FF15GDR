@@ -4,6 +4,8 @@
  */
 package ff;
 
+import java.util.Random;
+
 /**
  *
  * @author ficarra.gabriele
@@ -14,7 +16,12 @@ public class GameManager {
     private GestoreEventi gestoreEventi;
     private boolean giocoAttivo;
     private int passiTotali;
+    private Random rdn = new Random();
     
+    public int numeroPassi(){ // mi dice il numero di passi da fare
+        int nPassi = rdn.nextInt(12, 25);
+        return nPassi; 
+    }
     public void avviaGioco(){
         
     } 

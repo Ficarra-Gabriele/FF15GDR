@@ -10,12 +10,18 @@ package ff;
  */
 public class Gladiolus extends PersonaggioBase {
 
-    private final int aumentoVita = 5;
+    private boolean scudoReale; // ogni partita ha la possibilità di non farsi colpire una volta a partita (ogni volta che incontra un nemico si resetta) 
     
     public Gladiolus() {
-        super();
-        this.hp += aumentoVita;
-        this.hpMax += aumentoVita;
+        this.hp = 9000;
+        this.hpMax = 9000;
+        this.danno = 600; // se il giocatore usa bandane, pozioni e quant'altro riesce a tirare giù Ardin
+        this.dif = 700; // così riceve 40 danni dal personaggio base
+        this.difMax = 700;
+        this.stamina = 5; // può fare max 5 passi prima di dover ristabilire la stamina
+        this.staminaMax = 5;
+        this.passicompiuti = 0;
+        
     }
 
     @Override

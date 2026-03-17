@@ -10,12 +10,16 @@ package ff;
  */
 public class Prompto extends PersonaggioBase{
     
-    private final int aumentoStamina = 5;
 
     public Prompto() {
-        super();
-        this.stamina += aumentoStamina;
-        this.staminaMax += aumentoStamina;
+        this.hp = 7000;
+        this.hpMax = 7000;
+        this.danno = 540; // se il giocatore usa bandane, pozioni e quant'altro riesce a tirare giù Ardin
+        this.dif = 650; // così riceve 40 danni dal personaggio base
+        this.difMax = 650;
+        this.stamina = 15; // può fare max 5 passi prima di dover ristabilire la stamina
+        this.staminaMax = 15;
+        this.passicompiuti = 0;
     }
 
     @Override

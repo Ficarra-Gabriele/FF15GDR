@@ -10,7 +10,7 @@ package ff;
  */
 public class Boss extends Nemico {
 
-    private int moltiplicatoreDanno = 648; // il nemico normale fa 352 a colpo
+    private int moltiplicatoreDanno = 648; 
     public void aumentoDanno(Nemico n){
        int danno = n.getDanno();
        danno += moltiplicatoreDanno;
