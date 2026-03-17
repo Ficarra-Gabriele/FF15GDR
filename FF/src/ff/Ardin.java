@@ -11,18 +11,17 @@ package ff;
 public class Ardin extends Nemico{
 
     private boolean specialeDisponibile = true;
-    private int aumentaDanno;
     
     public void evocaIfrit(IEntitaDanneggiabile e ){
         e.riceviDanni(2500);
     } 
-    
-    private int moltiplicatoreDanno = 1000;
-    
-    public void aumentoDanno(Nemico n){
-       int danno = n.getDanno();
-       danno += moltiplicatoreDanno;
+
+    public Ardin() {
+        this.danno = 1200;
+        this.hp = 7000;
     }
+    
+    
     
     @Override
     public int getHp() {

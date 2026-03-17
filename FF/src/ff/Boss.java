@@ -10,10 +10,9 @@ package ff;
  */
 public class Boss extends Nemico {
 
-    private int moltiplicatoreDanno = 648; 
-    public void aumentoDanno(Nemico n){
-       int danno = n.getDanno();
-       danno += moltiplicatoreDanno;
+
+    public Boss() {
+        
     }
             
     @Override

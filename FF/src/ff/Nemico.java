@@ -10,19 +10,13 @@ package ff;
  */
 public abstract class Nemico implements IEntitaDanneggiabile {
     
-    protected String nome;
     protected int hp;
     protected int danno;
 
-    public Nemico() {
-        this.nome = nome;
-        this.hp = hp;
-        this.danno = 352;
-    }
-         
+         /*
     public int getDanno(){
         return danno;
-    }
+    }*/
     public void eseguiMossa(IEntitaDanneggiabile bersaglio){
         
     }
