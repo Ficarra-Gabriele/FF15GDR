@@ -4,20 +4,67 @@
  */
 package ff;
 
+import javax.swing.JButton;
+
 /**
  *
  * @author ficarra.gabriele
  */
 public class SchermataIniziale extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(SchermataIniziale.class.getName());
 
     /**
      * Creates new form SchermataIniziale
      */
-    public SchermataIniziale() {
-        initComponents();
+    
+     class PannelloSfondo extends javax.swing.JPanel { // ho scritto una classe interna al form per non farla esterna
+
+        java.awt.Image immagine;
+
+        public PannelloSfondo() {
+            immagine = new javax.swing.ImageIcon(getClass().getResource("/ff/immagini/schermata.png")).getImage();
+        }
+
+        @Override
+        protected void paintComponent(java.awt.Graphics g) {
+            super.paintComponent(g);
+            g.drawImage(immagine, 0, 0, getWidth(), getHeight(), this);
+        }
     }
+     
+    SchermataIniziale() {
+        initComponents();
+        pnlSchermata = new PannelloSfondo();
+        pnlSchermata.setLayout(null);
+        this.setContentPane(pnlSchermata);
+        creaInterfaccia();
+    }
+    
+    private void creaInterfaccia() {
+        JButton btnNuova = new JButton("NUOVA PARTITA");
+        btnNuova.setBounds(400, 300, 200, 50);
+        btnNuova.addActionListener(e -> avviaNuovaPartita());
+        pnlSchermata.add(btnNuova);
+        
+        JButton btnCarica = new JButton("CARICA PARTITA");
+        btnCarica.setBounds(400, 380, 200, 50);
+        btnCarica.addActionListener(e -> caricaPartitaEsistente());
+        pnlSchermata.add(btnCarica);
+    }
+
+    private void avviaNuovaPartita() {
+        new PartitaVisual().setVisible(true);
+    }
+
+    private void caricaPartitaEsistente() {
+        if (FileManager.caricaCSV()) {
+            new PartitaVisual().setVisible(true);
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Salvataggio non trovato!");
+        }
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,37 +75,25 @@ public class SchermataIniziale extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        pnlSchermata = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(800, 600));
+        setPreferredSize(new java.awt.Dimension(1000, 700));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+        javax.swing.GroupLayout pnlSchermataLayout = new javax.swing.GroupLayout(pnlSchermata);
+        pnlSchermata.setLayout(pnlSchermataLayout);
+        pnlSchermataLayout.setHorizontalGroup(
+            pnlSchermataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 530, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+        pnlSchermataLayout.setVerticalGroup(
+            pnlSchermataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 500, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(162, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(138, 138, 138))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(148, Short.MAX_VALUE))
-        );
+        getContentPane().add(pnlSchermata, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 530, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -67,6 +102,7 @@ public class SchermataIniziale extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -89,6 +125,6 @@ public class SchermataIniziale extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel pnlSchermata;
     // End of variables declaration//GEN-END:variables
 }
