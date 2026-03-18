@@ -10,6 +10,10 @@ package ff;
  */
 public class GrandeRospoAzzurro extends Nemico {
 
+    
+    public void spingiIndietro(){
+        
+    }
     @Override
     public int getHp() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

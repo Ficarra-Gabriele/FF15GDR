@@ -12,7 +12,8 @@ public class Boss extends Nemico {
 
 
     public Boss() {
-        
+        this.danno = 500;
+        this.hp = 3500;
     }
             
     @Override

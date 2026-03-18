@@ -13,4 +13,5 @@ public interface IEntitaDanneggiabile {
     public int getHp();
     public void riceviDanni(int quantità);
     public boolean isVivo();
+    
 }

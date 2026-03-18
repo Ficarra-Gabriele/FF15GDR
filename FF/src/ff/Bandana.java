@@ -11,5 +11,5 @@ package ff;
 class Bandana extends Oggetto{
     
     private int bonusDif;
-    private int bonusAtt;
+    private int bonusAtk;
 }

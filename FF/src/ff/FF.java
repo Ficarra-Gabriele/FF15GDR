@@ -14,9 +14,7 @@ public class FF {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
-        // i personaggi dichiarano i valori degli attributi nel proprio costruttore 
-        // i moltiplicatori non vanno bene
+        // il panel deve adattarsi
         // aggiungi andato a segno e non andato a segno
         // le spell bisciottano i boss e oneshottano i piccoli nemici, hanno poca probabilità di colpire
         // pozioni abbastanza rare per ricaricare il mana, può lanciare 10 magie max, si può ricaricare con le pozioni

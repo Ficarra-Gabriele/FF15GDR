@@ -10,6 +10,14 @@ package ff;
  */
 public class GrandePolloRosa extends Nemico {
 
+    public void fattiCoccolare(){
+        
+    }
+    
+    public void sottraiStamina(IEntitaDanneggiabile e){
+        
+    }
+    
     @Override
     public int getHp() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

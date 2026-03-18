@@ -10,6 +10,15 @@ package ff;
  */
 public class GolemDiElisir extends Nemico{
 
+    public GolemDiElisir() {
+        this.danno = 352;
+        this.hp = 1200;
+    }
+    
+    public void avvelena(IEntitaDanneggiabile e){
+        
+    }
+    
     @Override
     public int getHp() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

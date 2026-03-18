@@ -13,10 +13,6 @@ public abstract class Nemico implements IEntitaDanneggiabile {
     protected int hp;
     protected int danno;
 
-         /*
-    public int getDanno(){
-        return danno;
-    }*/
     public void eseguiMossa(IEntitaDanneggiabile bersaglio){
         
     }

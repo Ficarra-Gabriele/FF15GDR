@@ -10,6 +10,16 @@ package ff;
  */
 public class GrandeTacchinoImperatore extends Nemico {
 
+    public GrandeTacchinoImperatore() {
+        this.danno = 345;
+        this.hp = 1150;
+    }
+    
+    public void confondi(IEntitaDanneggiabile e){
+        
+    }
+    
+
     @Override
     public int getHp() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -24,5 +34,5 @@ public class GrandeTacchinoImperatore extends Nemico {
     public boolean isVivo() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
 }
