@@ -21,6 +21,8 @@ public class FF {
         // ogni volta che trovo una pozione o un qualunque altro evento, ho una possibilità minore di rincontrare lo stesso evento di seguito
         // cosa succede se il giocatore finisce la stamina? Risolvi
         
+        SchermataIniziale s = new SchermataIniziale();
+        s.setVisible(true);
     }
     
 }
