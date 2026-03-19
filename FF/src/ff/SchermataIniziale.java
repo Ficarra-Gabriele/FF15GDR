@@ -4,9 +4,7 @@
  */
 package ff;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import javax.swing.JButton;
 
 /**
  *
@@ -15,99 +13,58 @@ import java.awt.event.*;
 public class SchermataIniziale extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(SchermataIniziale.class.getName());
-    private JButton btnNuova, btnCarica, btnClassifica;
 
     /**
-    class PannelloSfondo extends JPanel { // ho scritto una classe interna al form per non farla esterna
+     * Creates new form SchermataIniziale
+     */
+    
+     class PannelloSfondo extends javax.swing.JPanel { // ho scritto una classe interna al form per non farla esterna
 
-        Image immagine;
-        
-        PannelloSfondo() {
-            immagine = new ImageIcon(getClass().getResource("/ff/immagini/schermata.png")).getImage();
+        java.awt.Image immagine;
+
+        public PannelloSfondo() {
+            immagine = new javax.swing.ImageIcon(getClass().getResource("/ff/immagini/schermata.png")).getImage();
         }
-        
+
         @Override
-        protected void paintComponent(Graphics g) {
+        protected void paintComponent(java.awt.Graphics g) {
             super.paintComponent(g);
             g.drawImage(immagine, 0, 0, getWidth(), getHeight(), this);
         }
     }
-
-    public SchermataIniziale() {
+     
+    SchermataIniziale() {
         initComponents();
-
         pnlSchermata = new PannelloSfondo();
-        pnlSchermata.setLayout(null); //sennò non mi fa mettere i bottoni
+        pnlSchermata.setLayout(null);
         this.setContentPane(pnlSchermata);
-
         creaInterfaccia();
-
-        this.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                int nuovaX = (getWidth() / 2) + 100;
-                int nuovaY = (getHeight() / 2) + 45;
-
-                btnNuova.setLocation(nuovaX, nuovaY);
-                btnCarica.setLocation(nuovaX + 15, nuovaY + 35);
-                btnClassifica.setLocation(nuovaX + 30, nuovaY + 70);
-            }
-        });
-
-        this.setLocationRelativeTo(null);
     }
-
+    
     private void creaInterfaccia() {
-        btnNuova = creaBottoneSottile("NEW GAME");
-        btnCarica = creaBottoneSottile("LOAD GAME");
-        btnClassifica = creaBottoneSottile("LEADERBOARD");
-
-        btnNuova.addActionListener(e -> {
-            this.dispose();
-            new PartitaVisual().setVisible(true);
-        });
-
-        btnCarica.addActionListener(e -> caricaPartitaEsistente());
-
+        JButton btnNuova = new JButton("NUOVA PARTITA");
+        btnNuova.setBounds(400, 300, 200, 50);
+        btnNuova.addActionListener(e -> avviaNuovaPartita());
         pnlSchermata.add(btnNuova);
+        
+        JButton btnCarica = new JButton("CARICA PARTITA");
+        btnCarica.setBounds(400, 380, 200, 50);
+        btnCarica.addActionListener(e -> caricaPartitaEsistente());
         pnlSchermata.add(btnCarica);
-        pnlSchermata.add(btnClassifica);
     }
 
-    private JButton creaBottoneSottile(String testo) { // così riesco a dare l'effetto a "scala" dell'originale
-        JButton b = new JButton(testo);
-        b.setSize(300, 25);
-
-        b.setContentAreaFilled(false); // volevo renderlo come nell'originale
-        b.setBorderPainted(false);
-        b.setFocusPainted(false);
-        b.setForeground(Color.WHITE);
-        b.setFont(new Font("SansSerif", Font.PLAIN, 14));
-        b.setHorizontalAlignment(SwingConstants.LEFT);
-
-        b.addMouseListener(new MouseAdapter() { // volevo simulare l'effetto azzurro di FFXV
-            
-            public void mouseEntered(MouseEvent e) {
-                b.setForeground(new Color(173, 216, 230));
-                b.setText(">  " + testo); // Simula la freccia dell'origniale
-            }
-
-            public void mouseExited(MouseEvent e) {
-                b.setForeground(Color.WHITE);
-                b.setText(testo);
-            }
-        });
-        return b;
+    private void avviaNuovaPartita() {
+        new PartitaVisual().setVisible(true);
     }
 
     private void caricaPartitaEsistente() {
         if (FileManager.caricaCSV()) {
-            this.dispose();
             new PartitaVisual().setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(this, "Salvataggio non trovato!");
+            javax.swing.JOptionPane.showMessageDialog(this, "Salvataggio non trovato!");
         }
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
