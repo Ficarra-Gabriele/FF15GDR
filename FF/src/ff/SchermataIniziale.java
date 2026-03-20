@@ -17,7 +17,6 @@ public class SchermataIniziale extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(SchermataIniziale.class.getName());
     private JButton btnNuova, btnCarica, btnClassifica;
 
-    /**
     class PannelloSfondo extends JPanel { // ho scritto una classe interna al form per non farla esterna
 
         Image immagine;
@@ -64,7 +63,7 @@ public class SchermataIniziale extends javax.swing.JFrame {
 
         btnNuova.addActionListener(e -> {
             this.dispose();
-            new PartitaVisual().setVisible(true);
+            new SchermataDiGioco().setVisible(true);
         });
 
         btnCarica.addActionListener(e -> caricaPartitaEsistente());

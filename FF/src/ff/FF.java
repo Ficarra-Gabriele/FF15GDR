@@ -20,6 +20,7 @@ public class FF {
         // pozioni abbastanza rare per ricaricare il mana, può lanciare 10 magie max, si può ricaricare con le pozioni
         // ogni volta che trovo una pozione o un qualunque altro evento, ho una possibilità minore di rincontrare lo stesso evento di seguito
         // cosa succede se il giocatore finisce la stamina? Risolvi
+        // devo mettere il secondo form a tutto schermo, anche il primo semmai, cambia immagine cn una più scura semmai - secondo form
         
         SchermataIniziale s = new SchermataIniziale();
         s.setVisible(true);
