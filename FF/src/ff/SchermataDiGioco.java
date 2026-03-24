@@ -22,7 +22,7 @@ public class SchermataDiGioco extends javax.swing.JFrame {
         Image immagine;
         
         PannelloSfondo() {
-            immagine = new ImageIcon(getClass().getResource("/ff/immagini/schermataGioco.png")).getImage();
+            immagine = new ImageIcon(getClass().getResource("/ff/immagini/altissia.png")).getImage();
         }
         
         @Override
