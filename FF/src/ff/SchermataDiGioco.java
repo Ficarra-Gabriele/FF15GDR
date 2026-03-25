@@ -4,34 +4,34 @@
  */
 package ff;
 
-import java.awt.Graphics;
-import java.awt.Image;
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
 /**
  *
  * @author ficarra.gabriele
  */
 public class SchermataDiGioco extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(SchermataDiGioco.class.getName());
+    private JButton btnUsaPozione, btnAttacco, btnUsaSpeciale, btnProcedi, btnSalvaPartita, btnCaricaPartita;
 
     class PannelloSfondo extends JPanel { // ho scritto una classe interna al form per non farla esterna
 
         Image immagine;
-        
+
         PannelloSfondo() {
             immagine = new ImageIcon(getClass().getResource("/ff/immagini/altissia.png")).getImage();
         }
-        
+
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             g.drawImage(immagine, 0, 0, getWidth(), getHeight(), this);
         }
     }
-    
+
     /**
      * Creates new form SchermataDiGioco
      */
@@ -40,7 +40,69 @@ public class SchermataDiGioco extends javax.swing.JFrame {
         pnlGioco = new PannelloSfondo();
         pnlGioco.setLayout(null); //sennò non mi fa mettere i bottoni
         this.setContentPane(pnlGioco);
+        
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        creaInterfaccia();
+        
+       
+        this.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                int nuovaX = (getWidth() / 2) + 100;
+                int nuovaY = (getHeight() / 2) + 45;
+
+                btnUsaPozione.setLocation(nuovaX, nuovaY);
+                btnAttacco.setLocation(nuovaX + 15, nuovaY + 35);
+                btnUsaSpeciale.setLocation(nuovaX + 30, nuovaY + 70);
+                btnProcedi.setLocation(nuovaX + 60, nuovaY + 140);
+                btnSalvaPartita.setLocation(nuovaX + 120, nuovaY + 280);
+                btnCaricaPartita.setLocation(nuovaX + 240, nuovaY + 560);
+            }
+        });
+
         this.setLocationRelativeTo(null);
+    }
+
+    private void creaInterfaccia() {
+        btnUsaPozione = creaBottoneSottile("USE POTION");
+        btnAttacco = creaBottoneSottile("ATTACK");
+        btnUsaSpeciale = creaBottoneSottile("SPECIAL");
+        btnProcedi = creaBottoneSottile("EXPLORE");
+        btnSalvaPartita = creaBottoneSottile("SAVE");
+        btnCaricaPartita = creaBottoneSottile("UPLOAD");
+
+        pnlGioco.add(btnUsaPozione);
+        pnlGioco.add(btnAttacco);
+        pnlGioco.add(btnUsaSpeciale);
+        pnlGioco.add(btnProcedi);
+        pnlGioco.add(btnSalvaPartita);
+        pnlGioco.add(btnCaricaPartita);
+    }
+
+    private JButton creaBottoneSottile(String testo) { // così riesco a dare l'effetto a "scala" dell'originale
+        JButton b = new JButton(testo);
+        b.setSize(300, 25);
+
+        b.setContentAreaFilled(false); // volevo renderlo come nell'originale
+        b.setBorderPainted(false);
+        b.setFocusPainted(false);
+        b.setForeground(Color.WHITE);
+        b.setFont(new Font("SansSerif", Font.PLAIN, 14));
+        b.setHorizontalAlignment(SwingConstants.LEFT);
+
+        b.addMouseListener(new MouseAdapter() { // volevo simulare l'effetto azzurro di FFXV
+
+            public void mouseEntered(MouseEvent e) {
+                b.setForeground(new Color(173, 216, 230));
+                b.setText(">  " + testo); // Simula la freccia dell'origniale
+            }
+
+            public void mouseExited(MouseEvent e) {
+                b.setForeground(Color.WHITE);
+                b.setText(testo);
+            }
+        });
+        return b;
     }
 
     /**
