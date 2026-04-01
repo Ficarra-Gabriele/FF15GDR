@@ -83,10 +83,9 @@ public class SchermataDiGioco extends javax.swing.JFrame {
         JButton b = new JButton(testo);
         b.setSize(300, 25);
 
-        b.setContentAreaFilled(false); // volevo renderlo come nell'originale
+        // volevo renderlo come nell'originale
         b.setBorderPainted(false);
         b.setFocusPainted(false);
-        b.setForeground(Color.WHITE);
         b.setFont(new Font("SansSerif", Font.PLAIN, 14));
         b.setHorizontalAlignment(SwingConstants.LEFT);
 

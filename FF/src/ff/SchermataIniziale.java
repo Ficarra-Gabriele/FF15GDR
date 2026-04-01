@@ -7,6 +7,8 @@ package ff;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import javax.sound.sampled.*;
+import java.io.File;
 
 /**
  *
@@ -17,14 +19,28 @@ public class SchermataIniziale extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(SchermataIniziale.class.getName());
     private JButton btnNuova, btnCarica, btnClassifica;
 
+    private void musica() {
+        try {
+            AudioInputStream audioInput = AudioSystem.getAudioInputStream(
+                    getClass().getResource("/ff/Musica/Somnus.wav")
+            );
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInput);
+            clip.start();
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+        } catch (Exception e) {
+            System.err.println("file non trovato"); 
+        }
+    }
+
     class PannelloSfondo extends JPanel { // ho scritto una classe interna al form per non farla esterna
 
         Image immagine;
-        
+
         PannelloSfondo() {
             immagine = new ImageIcon(getClass().getResource("/ff/immagini/schermata.png")).getImage();
         }
-        
+
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
@@ -35,21 +51,21 @@ public class SchermataIniziale extends javax.swing.JFrame {
     public SchermataIniziale() {
         initComponents();
 
+        musica();
         pnlSchermata = new PannelloSfondo();
         pnlSchermata.setLayout(null); //sennò non mi fa mettere i bottoni
         this.setContentPane(pnlSchermata);
-
         creaInterfaccia();
-
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                int nuovaX = (getWidth() / 2) + 100;
+                int nuovaX = (getWidth() / 2) + 110;
                 int nuovaY = (getHeight() / 2) + 45;
 
                 btnNuova.setLocation(nuovaX, nuovaY);
-                btnCarica.setLocation(nuovaX + 15, nuovaY + 35);
-                btnClassifica.setLocation(nuovaX + 30, nuovaY + 70);
+                btnCarica.setLocation(nuovaX + 30, nuovaY + 35);
+                btnClassifica.setLocation(nuovaX + 50, nuovaY + 70);
             }
         });
 
@@ -63,11 +79,10 @@ public class SchermataIniziale extends javax.swing.JFrame {
 
         btnNuova.addActionListener(e -> {
             this.dispose();
-            new SchermataDiGioco().setVisible(true);
+            new SchermataStoria().setVisible(true);
         });
 
         btnCarica.addActionListener(e -> caricaPartitaEsistente());
-
         pnlSchermata.add(btnNuova);
         pnlSchermata.add(btnCarica);
         pnlSchermata.add(btnClassifica);
@@ -75,8 +90,7 @@ public class SchermataIniziale extends javax.swing.JFrame {
 
     private JButton creaBottoneSottile(String testo) { // così riesco a dare l'effetto a "scala" dell'originale
         JButton b = new JButton(testo);
-        b.setSize(300, 25);
-
+        b.setSize(400, 30);
         b.setContentAreaFilled(false); // volevo renderlo come nell'originale
         b.setBorderPainted(false);
         b.setFocusPainted(false);
@@ -85,7 +99,7 @@ public class SchermataIniziale extends javax.swing.JFrame {
         b.setHorizontalAlignment(SwingConstants.LEFT);
 
         b.addMouseListener(new MouseAdapter() { // volevo simulare l'effetto azzurro di FFXV
-            
+
             public void mouseEntered(MouseEvent e) {
                 b.setForeground(new Color(173, 216, 230));
                 b.setText(">  " + testo); // Simula la freccia dell'origniale
