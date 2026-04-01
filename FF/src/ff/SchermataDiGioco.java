@@ -20,11 +20,9 @@ public class SchermataDiGioco extends javax.swing.JFrame {
     class PannelloSfondo extends JPanel { // ho scritto una classe interna al form per non farla esterna
 
         Image immagine;
-
         PannelloSfondo() {
             immagine = new ImageIcon(getClass().getResource("/ff/immagini/altissia.png")).getImage();
         }
-
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
@@ -82,8 +80,6 @@ public class SchermataDiGioco extends javax.swing.JFrame {
     private JButton creaBottoneSottile(String testo) { // così riesco a dare l'effetto a "scala" dell'originale
         JButton b = new JButton(testo);
         b.setSize(300, 25);
-
-        // volevo renderlo come nell'originale
         b.setBorderPainted(false);
         b.setFocusPainted(false);
         b.setFont(new Font("SansSerif", Font.PLAIN, 14));

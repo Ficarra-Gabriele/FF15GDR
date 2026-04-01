@@ -21,15 +21,24 @@ public class SchermataIniziale extends javax.swing.JFrame {
 
     private void musica() {
         try {
-            AudioInputStream audioInput = AudioSystem.getAudioInputStream(
-                    getClass().getResource("/ff/Musica/Somnus.wav")
-            );
+            AudioInputStream audioInput = AudioSystem.getAudioInputStream(getClass().getResource("/ff/Musica/Somnus.wav"));
             Clip clip = AudioSystem.getClip();
             clip.open(audioInput);
             clip.start();
             clip.loop(Clip.LOOP_CONTINUOUSLY);
         } catch (Exception e) {
-            System.err.println("file non trovato"); 
+            System.err.println("file non trovato");
+        }
+    }
+
+    private void suonoBottoni(String filePath) {
+        try {
+            AudioInputStream audioInput = AudioSystem.getAudioInputStream(getClass().getResource(filePath));
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInput);
+            clip.start();
+        } catch (Exception e) {
+            System.err.println("file non trovato");
         }
     }
 
@@ -103,11 +112,16 @@ public class SchermataIniziale extends javax.swing.JFrame {
             public void mouseEntered(MouseEvent e) {
                 b.setForeground(new Color(173, 216, 230));
                 b.setText(">  " + testo); // Simula la freccia dell'origniale
+                suonoBottoni("/ff/Musica/Cursor.wav");
             }
 
             public void mouseExited(MouseEvent e) {
                 b.setForeground(Color.WHITE);
                 b.setText(testo);
+            }
+            
+            public void mousePressed (MouseEvent e){
+                suonoBottoni("/ff/Musica/CursorPress.wav");
             }
         });
         return b;
