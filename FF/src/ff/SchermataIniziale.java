@@ -8,7 +8,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.sound.sampled.*;
-import java.io.File;
 
 /**
  *
@@ -18,11 +17,12 @@ public class SchermataIniziale extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(SchermataIniziale.class.getName());
     private JButton btnNuova, btnCarica, btnClassifica;
-
+    public static Clip clip;
+    
     private void musica() {
         try {
             AudioInputStream audioInput = AudioSystem.getAudioInputStream(getClass().getResource("/ff/Musica/Somnus.wav"));
-            Clip clip = AudioSystem.getClip();
+            clip = AudioSystem.getClip();
             clip.open(audioInput);
             clip.start();
             clip.loop(Clip.LOOP_CONTINUOUSLY);

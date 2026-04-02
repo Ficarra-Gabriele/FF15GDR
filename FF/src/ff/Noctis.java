@@ -27,19 +27,43 @@ public class Noctis extends PersonaggioBase {
         this.manaMax = 3000; // ogni spell costa 300, ne posso lanciare 10 prima di dover ristabilire il mana
     }
     
+    public int getMana() { 
+        return mana; 
+    }
+    public int getManaMax() { 
+        return manaMax; 
+    }
+    
     @Override
-    public int getHp() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public int getHp() { 
+        return this.hp; 
+    }
+    
+    public int getHpMax() { 
+        return this.hpMax; 
+    }
+    public int getDanno() { 
+        return this.danno; 
+    }
+    public int getDif() { 
+        return this.dif; 
+    }
+    public int getStamina() { 
+        return this.stamina; 
+    }
+    public int getPassi() { 
+        return this.passicompiuti; 
     }
 
     @Override
-    public void riceviDanni(int quantità) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void riceviDanni(int quantita) {
+        this.hp -= quantita;
+        if (this.hp < 0) this.hp = 0;
     }
 
     @Override
     public boolean isVivo() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return this.hp > 0;
     }
     
 }
