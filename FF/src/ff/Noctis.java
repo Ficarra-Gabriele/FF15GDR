@@ -10,60 +10,117 @@ package ff;
  */
 public class Noctis extends PersonaggioBase {
 
-    private int mana;
-    private int manaMax;
-    
-    
+    private int mana = 3000;
+    private int manaMax = 3000;
+    private int guil = 500;
+    private int passi = 0;
+    private Bandana bandanaEquipaggiata = null;
+    private Spada spadaEquipaggiata = null;
+
     public Noctis() {
         this.hp = 8000;
         this.hpMax = 8000;
-        this.danno = 570; // se il giocatore usa magie, pozioni e quant'altro riesce a tirare giù Ardin
-        this.dif = 664; // così riceve 40 danni dal personaggio base
-        this.difMax = 664;
-        this.stamina = 10; // può fare max 10 passi prima di dover ristabilire la stamina
-        this.staminaMax = 10;
-        this.passicompiuti = 0;
-        this.mana = 3000;
-        this.manaMax = 3000; // ogni spell costa 300, ne posso lanciare 10 prima di dover ristabilire il mana
+        this.danno = 570;
+        this.dif = 3000;
+        this.difMax = 3000;
+        this.stamina = 20;
+        this.staminaMax = 20;
     }
-    
-    public int getMana() { 
-        return mana; 
+
+    public void castSpell(IEntitaDanneggiabile b) {
+        if (this.mana >= 100) {
+            this.mana -= 100;
+            b.riceviDanni(500);
+        }
     }
-    public int getManaMax() { 
-        return manaMax; 
-    }
-    
-    @Override
-    public int getHp() { 
-        return this.hp; 
-    }
-    
-    public int getHpMax() { 
-        return this.hpMax; 
-    }
-    public int getDanno() { 
-        return this.danno; 
-    }
-    public int getDif() { 
-        return this.dif; 
-    }
-    public int getStamina() { 
-        return this.stamina; 
-    }
-    public int getPassi() { 
-        return this.passicompiuti; 
+
+    public void warpStrike(IEntitaDanneggiabile b) {
+        if (this.mana >= 1000) {
+            this.mana -= 1000;
+            b.riceviDanni(1100);
+        }
     }
 
     @Override
-    public void riceviDanni(int quantita) {
-        this.hp -= quantita;
-        if (this.hp < 0) this.hp = 0;
+    public void riceviDanni(int q) {
+        if (this.dif > 0) {
+            int assorbito = Math.min(q, this.dif);
+            this.dif -= assorbito;
+            int rimanente = q - assorbito;
+            this.hp -= rimanente;
+        } else {
+            this.hp -= q;
+        }
+        if (this.hp < 0) {
+            this.hp = 0;
+        }
     }
 
-    @Override
-    public boolean isVivo() {
-        return this.hp > 0;
+    public void equipaggiaBandana(Bandana b) {
+        if (bandanaEquipaggiata != null) {
+            bandanaEquipaggiata.rimuoviEffetto(this);
+        }
+        this.bandanaEquipaggiata = b;
+        b.applicaEffetto(this);
     }
-    
+
+    public void equipaggiaSpada(Spada s) {
+        if (spadaEquipaggiata != null) {
+            spadaEquipaggiata.rimuoviEffetto(this);
+        }
+        this.spadaEquipaggiata = s;
+        s.applicaEffetto(this);
+    }
+
+    public Bandana getBandanaEquipaggiata() {
+        return bandanaEquipaggiata;
+    }
+
+    public void rigeneraMana(int q) {
+        this.mana = Math.min(this.mana + q, this.manaMax);
+    }
+
+    public int getGuil() {
+        return guil;
+    }
+
+    public void aggiungiGuil(int g) {
+        this.guil += g;
+    }
+
+    public void spendiGuil(int c) {
+        this.guil -= c;
+    }
+
+    public void setHpMax(int n) {
+        this.hpMax = n;
+    }
+
+    public void setManaMax(int n) {
+        this.manaMax = n;
+    }
+
+    public void setHp(int n) {
+        this.hp = Math.max(0, Math.min(n, hpMax));
+    }
+
+    public void setStamina(int n) {
+        this.stamina = Math.max(0, Math.min(n, staminaMax));
+    }
+
+    public int getMana() {
+        return mana;
+    }
+
+    public int getManaMax() {
+        return manaMax;
+    }
+
+    public int getPassi() {
+        return passi;
+    }
+
+    public void incrementaPassi() {
+        this.passi++;
+    }
 }

@@ -10,23 +10,15 @@ package ff;
  */
 public class GrandeRospoAzzurro extends Nemico {
 
-    
-    public void spingiIndietro(){
-        
-    }
-    @Override
-    public int getHp() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public GrandeRospoAzzurro() {
+        this.nome = "granderospoazzurro";
+        this.hp = 900;
+        this.danno = 200;
+        this.hpMax = hp;
     }
 
     @Override
-    public void riceviDanni(int quantità) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void eseguiMossa(IEntitaDanneggiabile b) {
+        b.riceviDanni(this.danno);
     }
-
-    @Override
-    public boolean isVivo() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
 }

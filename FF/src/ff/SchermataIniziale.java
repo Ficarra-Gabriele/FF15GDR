@@ -18,7 +18,7 @@ public class SchermataIniziale extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(SchermataIniziale.class.getName());
     private JButton btnNuova, btnCarica, btnClassifica;
     public static Clip clip;
-    
+
     private void musica() {
         try {
             AudioInputStream audioInput = AudioSystem.getAudioInputStream(getClass().getResource("/ff/Musica/Somnus.wav"));
@@ -42,7 +42,7 @@ public class SchermataIniziale extends javax.swing.JFrame {
         }
     }
 
-    class PannelloSfondo extends JPanel { // ho scritto una classe interna al form per non farla esterna
+    class PannelloSfondo extends JPanel {
 
         Image immagine;
 
@@ -62,7 +62,7 @@ public class SchermataIniziale extends javax.swing.JFrame {
 
         musica();
         pnlSchermata = new PannelloSfondo();
-        pnlSchermata.setLayout(null); //sennò non mi fa mettere i bottoni
+        pnlSchermata.setLayout(null);
         this.setContentPane(pnlSchermata);
         creaInterfaccia();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -97,21 +97,21 @@ public class SchermataIniziale extends javax.swing.JFrame {
         pnlSchermata.add(btnClassifica);
     }
 
-    private JButton creaBottoneSottile(String testo) { // così riesco a dare l'effetto a "scala" dell'originale
+    private JButton creaBottoneSottile(String testo) {
         JButton b = new JButton(testo);
         b.setSize(400, 30);
-        b.setContentAreaFilled(false); // volevo renderlo come nell'originale
+        b.setContentAreaFilled(false);
         b.setBorderPainted(false);
         b.setFocusPainted(false);
         b.setForeground(Color.WHITE);
         b.setFont(new Font("SansSerif", Font.PLAIN, 14));
         b.setHorizontalAlignment(SwingConstants.LEFT);
 
-        b.addMouseListener(new MouseAdapter() { // volevo simulare l'effetto azzurro di FFXV
+        b.addMouseListener(new MouseAdapter() {
 
             public void mouseEntered(MouseEvent e) {
                 b.setForeground(new Color(173, 216, 230));
-                b.setText(">  " + testo); // Simula la freccia dell'origniale
+                b.setText(">  " + testo);
                 suonoBottoni("/ff/Musica/Cursor.wav");
             }
 
@@ -119,8 +119,8 @@ public class SchermataIniziale extends javax.swing.JFrame {
                 b.setForeground(Color.WHITE);
                 b.setText(testo);
             }
-            
-            public void mousePressed (MouseEvent e){
+
+            public void mousePressed(MouseEvent e) {
                 suonoBottoni("/ff/Musica/CursorPress.wav");
             }
         });

@@ -9,15 +9,28 @@ package ff;
  * @author ficarra.gabriele
  */
 class Pozione extends Oggetto {
-    private String tipoStat;
-    private int potenza;
-    private boolean raccoglibile;
-    
-    public String getTipoStat(){
-        return tipoStat;
+
+    private String tipo;
+
+    public Pozione(String t) {
+        this.tipo = t;
     }
-    
-    public int getPotenza(){
-        return potenza;
+
+    public String getTipo() {
+        return tipo;
     }
-}
+
+    public void applicaEffetto(Noctis n) {
+        switch (tipo) {
+            case "HP" ->
+                n.setHp(n.getHp() + (n.getHpMax() * 20 / 100));
+            case "MANA" ->
+                n.rigeneraMana(n.getManaMax() * 20 / 100);
+                
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Pozione di " + tipo; 
+    }}

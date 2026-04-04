@@ -9,13 +9,14 @@ package ff;
  * @author ficarra.gabriele
  */
 public class TurnManager {
-    private int turnoCorrente;
+
+private int turnoCorrente;
     
     public void prossimoTurno(){
-        
+        turnoCorrente++;
     }
     
     public void IniziaBattaglia(){
-        
+        turnoCorrente = 1;
     }
 }

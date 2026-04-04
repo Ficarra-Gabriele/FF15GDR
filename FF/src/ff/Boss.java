@@ -10,25 +10,22 @@ package ff;
  */
 public class Boss extends Nemico {
 
+    private boolean potenziamentoAttivo;
 
     public Boss() {
-        this.danno = 500;
-        this.hp = 3500;
-    }
-            
-    @Override
-    public int getHp() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        super();
+        this.potenziamentoAttivo = false;
+        this.hpMax = hp;
     }
 
     @Override
-    public void riceviDanni(int quantità) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void eseguiMossa(IEntitaDanneggiabile bersaglio) {
+        if (potenziamentoAttivo == true) {
+            bersaglio.riceviDanni(this.danno * 2);
+            potenziamentoAttivo = false;
+        } else {
+            bersaglio.riceviDanni(this.danno);
+            potenziamentoAttivo = true;
+        }
     }
-
-    @Override
-    public boolean isVivo() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
 }

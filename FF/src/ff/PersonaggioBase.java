@@ -12,25 +12,34 @@ import java.util.ArrayList;
  */
 public abstract class PersonaggioBase implements IEntitaDanneggiabile {
 
-    protected int hp;
-    protected int hpMax;
-    protected int dif;
-    protected int difMax;
-    protected int stamina;
-    protected int staminaMax;
-    protected int passicompiuti;
-    protected int danno;
-    protected boolean parry;
-    protected boolean haIlChocobo;
+    protected int hp, hpMax, dif, difMax, stamina, staminaMax, danno;
     protected ArrayList<Oggetto> inventario = new ArrayList<>();
-    
-    public void riceviDanno(int quantita){
-        
+
+    public int getHp() {
+        return hp;
     }
-    public void usaPozione(Pozione p){
-        
+
+    public int getHpMax() {
+        return hpMax;
     }
-    public void equipaggiaBandana(Bandana b){
-        
+
+    public int getDif() {
+        return dif;
+    }
+
+    public int getDanno() {
+        return danno;
+    }
+
+    public int getStamina() {
+        return stamina;
+    }
+
+    public boolean isVivo() {
+        return hp > 0;
+    }
+
+    public ArrayList<Oggetto> getInventario() {
+        return inventario;
     }
 }

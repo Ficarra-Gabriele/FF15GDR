@@ -28,7 +28,7 @@ public class SchermataStoria extends javax.swing.JFrame {
             try {
                 sfondo = new ImageIcon(getClass().getResource("/ff/immagini/Storia.jpg")).getImage();
             } catch (Exception e) {
-                System.err.println("Immagine non trovata!");
+                System.err.println("Immagine non trovata");
             }
         }
 
@@ -52,7 +52,7 @@ public class SchermataStoria extends javax.swing.JFrame {
             + "Insieme, dovranno attraversare terre selvagge dove gli Astrali — Titani di pietra e Dei di ghiaccio — dormono in attesa di essere risvegliati da una Sciamana che sacrifica la propria vita per unire la terra al cielo. Dovranno cercare le tombe dei re antichi, dove le armi del passato attendono mani degne di impugnarle. Ogni chilometro di asfalto, ogni pasto consumato attorno a un fuoco, ogni battaglia contro i Magitek dell'Impero è un passo verso una verità terribile: l'alba non è un diritto, è un dono che va pagato col sangue.\n"
             + "\n"
             + "Niflheim ha già marciato su Insomnia. Il trono è vuoto, il Cristallo è perduto e l'oscuro Ardyn Izunia osserva il mondo sgretolarsi con il sorriso di chi ha atteso secoli per questo momento. La storia non chiederà a questi quattro compagni di essere eroi, ma di essere fratelli fino all'ultimo respiro. Perché quando la notte diventerà eterna, non saranno le corone a illuminare la via, ma il legame indissolubile di chi ha deciso di sfidare il destino, insieme.";
-    
+
     private int letteraAttuale = 0;
     private Timer timerDigitazione;
     private JLayeredPane layeredPane;
@@ -143,7 +143,7 @@ public class SchermataStoria extends javax.swing.JFrame {
         b.setBorder(BorderFactory.createLineBorder(new Color(255, 255, 255, 100), 1));
         b.setCursor(new Cursor(Cursor.HAND_CURSOR));
         b.addMouseListener(new java.awt.event.MouseAdapter() {
-            
+
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 b.setBorder(BorderFactory.createLineBorder(Color.WHITE, 2));
 

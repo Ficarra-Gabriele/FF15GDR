@@ -9,9 +9,10 @@ package ff;
  * @author ficarra.gabriele
  */
 public interface IEntitaDanneggiabile {
-    
-    public int getHp();
-    public void riceviDanni(int quantità);
-    public boolean isVivo();
-    
+
+    int getHp();
+
+    void riceviDanni(int quantita);
+
+    boolean isVivo();
 }

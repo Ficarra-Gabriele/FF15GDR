@@ -9,9 +9,6 @@ package ff;
  * @author ficarra.gabriele
  */
 public abstract class Oggetto {
-    
-    public void applicaEffetto(IEntitaDanneggiabile e){
-        
-    }
-            
+
+public abstract void applicaEffetto(Noctis n);
 }

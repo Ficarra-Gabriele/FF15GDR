@@ -8,30 +8,20 @@ package ff;
  *
  * @author ficarra.gabriele
  */
-public class GolemDiElisir extends Nemico{
+public class GolemDiElisir extends Nemico {
 
     public GolemDiElisir() {
+        this.nome = "golemdielisir";
+        this.hp = 1000;
         this.danno = 352;
-        this.hp = 1200;
-    }
-    
-    public void avvelena(IEntitaDanneggiabile e){
-        
-    }
-    
-    @Override
-    public int getHp() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.hpMax = hp;
     }
 
-    @Override
-    public void riceviDanni(int quantità) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void eseguiMossa(IEntitaDanneggiabile b) {
+        b.riceviDanni(this.danno);
+        if (!specialeUsata && b instanceof Noctis n) {
+            n.riceviDanni(n.getHpMax() * 10 / 100);
+            specialeUsata = true;
+        }
     }
-
-    @Override
-    public boolean isVivo() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
 }

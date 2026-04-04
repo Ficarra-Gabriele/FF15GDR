@@ -11,28 +11,20 @@ package ff;
 public class GrandeTacchinoImperatore extends Nemico {
 
     public GrandeTacchinoImperatore() {
+        this.nome = "grandetacchinoimperatore";
+        this.hp = 900;
         this.danno = 345;
-        this.hp = 1150;
-    }
-    
-    public void confondi(IEntitaDanneggiabile e){
-        
-    }
-    
-
-    @Override
-    public int getHp() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.hpMax = hp;
     }
 
     @Override
-    public void riceviDanni(int quantità) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void eseguiMossa(IEntitaDanneggiabile b) {
+        if (!specialeUsata) {
+            b.riceviDanni(this.danno);
+            b.riceviDanni(this.danno);
+            specialeUsata = true;
+        } else {
+            b.riceviDanni(this.danno);
+        }
     }
-
-    @Override
-    public boolean isVivo() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
 }

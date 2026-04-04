@@ -10,27 +10,23 @@ package ff;
  */
 public class GrandePolloRosa extends Nemico {
 
-    public void fattiCoccolare(){
-        
-    }
-    
-    public void sottraiStamina(IEntitaDanneggiabile e){
-        
-    }
-    
-    @Override
-    public int getHp() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public GrandePolloRosa() {
+        this.nome = "grandepollorosa";
+        this.hp = 1;
+        this.danno = 0;
+        this.hpMax = hp;
     }
 
     @Override
-    public void riceviDanni(int quantità) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void eseguiMossa(IEntitaDanneggiabile b) {
+        if (!specialeUsata && b instanceof Noctis n) {
+            n.setStamina(n.getStamina() - 3);
+            specialeUsata = true;
+        }
     }
 
     @Override
-    public boolean isVivo() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void riceviDanni(int q) {
+        this.hp = 0;
     }
-    
 }

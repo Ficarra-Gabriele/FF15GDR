@@ -9,12 +9,30 @@ package ff;
  * @author ficarra.gabriele
  */
 public abstract class Nemico implements IEntitaDanneggiabile {
-    
-    protected int hp;
-    protected int danno;
 
-    public void eseguiMossa(IEntitaDanneggiabile bersaglio){
-        
+    protected String nome;
+    protected int hp, hpMax, danno;
+    protected boolean specialeUsata = false;
+
+    public abstract void eseguiMossa(IEntitaDanneggiabile bersaglio);
+
+    public int getHp() {
+        return hp;
     }
-    
+
+    public int getHpMax() {
+        return hpMax;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public boolean isVivo() {
+        return hp > 0;
+    }
+
+    public void riceviDanni(int q) {
+        this.hp = Math.max(0, this.hp - q);
+    }
 }
