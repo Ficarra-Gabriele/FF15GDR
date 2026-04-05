@@ -128,11 +128,15 @@ public class SchermataIniziale extends javax.swing.JFrame {
     }
 
     private void caricaPartitaEsistente() {
-        if (FileManager.caricaCSV()) {
+        FileManager fm = new FileManager();
+        Noctis caricato = fm.selezionaECarica(this);
+
+        if (caricato != null) {
+            if (clip != null) {
+                clip.stop();
+            }
             this.dispose();
-            new PartitaVisual().setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(this, "Salvataggio non trovato!");
+            new SchermataDiGioco(caricato).setVisible(true);
         }
     }
 

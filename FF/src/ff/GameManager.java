@@ -98,7 +98,10 @@ public class GameManager {
                 descrizioneEvento = "PROIEZIONE OFFENSIVA: Lanci la tua arma e ti smaterializzi per riapparire istantaneamente sul nemico, colpendolo con una forza cinetica incredibile!";
             }
             case "DIFESA" -> {
-                giocatore.dif = Math.min(giocatore.difMax, giocatore.dif + 500);
+                giocatore.dif = giocatore.dif + 500;
+                if (giocatore.dif > giocatore.difMax) {
+                    giocatore.dif = giocatore.difMax;
+                }
                 descrizioneEvento = "POSIZIONE DIFENSIVA: Evochi lo scudo dei Re Lucis. La tua difesa aumenta temporaneamente, preparandoti a incassare il prossimo colpo.";
             }
         }
@@ -128,11 +131,19 @@ public class GameManager {
     }
 
     public int getPassiRimanenti() {
-        return Math.max(0, passiTotali - passiFatti);
+        int rimanenti = passiTotali - passiFatti;
+        if (rimanenti < 0) {
+            return 0;
+        } else {
+            return rimanenti;
+        }
     }
 
     public boolean isGameOver() {
-        return !giocatore.isVivo() || giocatore.getStamina() < 0;
+        if (giocatore.isVivo() == false || giocatore.getStamina() < 0) {
+            return true;
+        }
+        return false;
     }
 
     public boolean isVittoriaFinale() {

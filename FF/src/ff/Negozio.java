@@ -22,6 +22,7 @@ public class Negozio {
         for (int i = 0; i < 5; i++) {
             merce.add(new Pozione("HP"));
             merce.add(new Pozione("MANA"));
+            merce.add(new Pozione("STAMINA"));
         }
 
         for (int t = 1; t <= 5; t++) {

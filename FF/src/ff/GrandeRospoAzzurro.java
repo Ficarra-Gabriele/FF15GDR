@@ -18,7 +18,11 @@ public class GrandeRospoAzzurro extends Nemico {
     }
 
     @Override
-    public void eseguiMossa(IEntitaDanneggiabile b) {
-        b.riceviDanni(this.danno);
+    public void eseguiMossa(IEntitaDanneggiabile bersaglio) {
+        bersaglio.riceviDanni(this.danno);
+        if (!specialeUsata) {
+            bersaglio.applicaEffetto("RALLENTA", 2);
+            specialeUsata = true;
+        }
     }
 }

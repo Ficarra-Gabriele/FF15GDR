@@ -21,14 +21,15 @@ class Pozione extends Oggetto {
     }
 
     public void applicaEffetto(Noctis n) {
-        switch (tipo) {
-            case "HP" ->
-                n.setHp(n.getHp() + (n.getHpMax() * 20 / 100));
-            case "MANA" ->
-                n.rigeneraMana(n.getManaMax() * 20 / 100);
-                
-        }
+    switch (tipo) {
+        case "HP" -> 
+            n.setHp(n.getHp() + (n.getHpMax() * 20 / 100));
+        case "MANA" -> 
+            n.rigeneraMana(n.getManaMax() * 20 / 100);
+        case "STAMINA" -> 
+            n.applicaEffetto("CURA_STAMINA", 3); 
     }
+}
 
     @Override
     public String toString() {

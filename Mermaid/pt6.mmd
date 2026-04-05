@@ -1,0 +1,160 @@
+---
+config:
+  theme: dark
+  themeVariables:
+    fontFamily: Monospaced
+    mainBkg: '#0a0b0d'
+    textColor: '#e0e0e0'
+    primaryColor: '#1c1e22'
+    primaryTextColor: '#d4af37'
+    primaryBorderColor: '#d4af37'
+    lineColor: '#4a90e2'
+    nodeBorder: '#8e8e8e'
+    clusterBkg: '#0f1113'
+    titleColor: '#4a90e2'
+  layout: elk
+---
+classDiagram
+direction TB
+    class IEntitaDanneggiabile {
+	    +getHp() int
+	    +riceviDanni(int quantita)
+	    +isVivo() boolean
+	    +applicaEffetto(String tipo, int valore)
+    }
+
+    class PersonaggioBase {
+	    #int hp
+	    #int hpMax
+	    #int dif
+	    #int difMax
+	    #int stamina
+	    #int staminaMax
+	    #int danno
+    }
+
+    class Noctis {
+	    -int turniVeleno
+	    -int passiMalus
+	    -int mana
+	    -int manaMax
+	    -int guil
+	    -int passi
+	    +castSpell(IEntitaDanneggiabile b)
+	    +warpStrike(IEntitaDanneggiabile b)
+	    +aggiornaStati()
+	    +equipaggiaBandana(Bandana b)
+	    +equipaggiaSpada(Spada s)
+	    +rigeneraMana(int q)
+    }
+
+    class Nemico {
+	    #String nome
+	    #int hp
+	    #int hpMax
+	    #int danno
+	    #boolean specialeUsata
+	    +eseguiMossa(IEntitaDanneggiabile bersaglio)*
+    }
+
+    class Ardyn {
+	    +eseguiMossa(IEntitaDanneggiabile b)
+    }
+
+    class Boss {
+	    -boolean potenziamentoAttivo
+    }
+
+    class GolemDiElisir {
+	    +eseguiMossa(IEntitaDanneggiabile b)
+    }
+
+    class GrandePolloRosa {
+	    +eseguiMossa(IEntitaDanneggiabile b)
+    }
+
+    class GrandeRospoAzzurro {
+	    +eseguiMossa(IEntitaDanneggiabile b)
+    }
+
+    class GrandeTacchinoImperatore {
+	    +eseguiMossa(IEntitaDanneggiabile b)
+    }
+
+    class Oggetto {
+	    +applicaEffetto(Noctis n)*
+    }
+
+    class Pozione {
+	    -String tipo
+    }
+
+    class Bandana {
+	    -int tipo
+	    -int prezzo
+	    +rimuoviEffetto(Noctis n)
+    }
+
+    class Spada {
+	    -String nome
+	    -int bonus
+	    -int prezzo
+	    +rimuoviEffetto(Noctis n)
+    }
+
+    class GameManager {
+	    -int passiTotali
+	    -int passiFatti
+	    -boolean battagliaAttiva
+	    -String ultimoEventoImg
+	    -String descrizioneEvento
+	    +esplora()
+	    +eseguiTurno(String azione)
+	    -controlloProgressione()
+	    -processaEvento(Object ev)
+    }
+
+    class GestoreEventi {
+	    +generaEvento() Object
+    }
+
+    class Negozio {
+	    +getMerce() ArrayList~Oggetto~
+    }
+
+    class TurnManager {
+	    -int turnoCorrente
+	    +prossimoTurno()
+	    +IniziaBattaglia()
+    }
+
+    class FileManager {
+	    +salvaPartita(Noctis n, String nomeFile)
+	    +caricaPartita(String nomeFile) Noctis
+    }
+
+	<<interface>> IEntitaDanneggiabile
+	<<abstract>> PersonaggioBase
+	<<abstract>> Nemico
+	<<abstract>> Oggetto
+
+    PersonaggioBase ..|> IEntitaDanneggiabile
+    Noctis --|> PersonaggioBase
+    Nemico ..|> IEntitaDanneggiabile
+    Ardyn --|> Nemico
+    Boss --|> Nemico
+    GolemDiElisir --|> Nemico
+    GrandePolloRosa --|> Nemico
+    GrandeRospoAzzurro --|> Nemico
+    GrandeTacchinoImperatore --|> Nemico
+    Pozione --|> Oggetto
+    Bandana --|> Oggetto
+    Spada --|> Oggetto
+    PersonaggioBase "1" o-- "0..*" Oggetto : -inventario
+    Negozio "1" --> "0..*" Oggetto : -merce
+    GameManager --> Noctis : -giocatore
+    GameManager --> Nemico : -nemicoCorrente
+    GameManager --> GestoreEventi : -gestoreEventi
+    GameManager --> TurnManager : -turnManager (implied)
+    Noctis "1" --> "0..1" Bandana : -bandanaEquipaggiata
+    Noctis "1" --> "0..1" Spada : -spadaEquipaggiata

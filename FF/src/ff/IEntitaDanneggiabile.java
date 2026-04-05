@@ -15,4 +15,7 @@ public interface IEntitaDanneggiabile {
     void riceviDanni(int quantita);
 
     boolean isVivo();
+
+    void applicaEffetto(String tipoEffetto, int valore);
+
 }

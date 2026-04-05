@@ -288,6 +288,22 @@ public class SchermataDiGioco extends javax.swing.JFrame {
                 }
             }
         });
+
+        btnSav.addActionListener(e -> {
+            String nomeFile = JOptionPane.showInputDialog(this, "Nome del salvataggio:");
+            if (nomeFile != null && !nomeFile.trim().isEmpty()) {
+                new FileManager().salvaPartita(noctis, nomeFile);
+            }
+        });
+
+        btnLoad.addActionListener(e -> {
+            Noctis caricato = new FileManager().selezionaECarica(this);
+            if (caricato != null) {
+                this.noctis = caricato;
+                this.gameManager = new GameManager(noctis);
+                aggiornaDati();
+            }
+        });
     }
 
     private void aggiornaDati() {
@@ -330,6 +346,8 @@ public class SchermataDiGioco extends javax.swing.JFrame {
                     "/ff/immagini/cura.png";
                 case "pozionemana" ->
                     "/ff/immagini/mana.png";
+                case "pozionestamina" ->
+                    "/ff/immagini/stamina.png";
                 case "chocobo" ->
                     "/ff/immagini/chocobo.png";
                 default ->

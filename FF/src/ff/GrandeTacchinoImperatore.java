@@ -20,8 +20,7 @@ public class GrandeTacchinoImperatore extends Nemico {
     @Override
     public void eseguiMossa(IEntitaDanneggiabile b) {
         if (!specialeUsata) {
-            b.riceviDanni(this.danno);
-            b.riceviDanni(this.danno);
+            b.riceviDanni(this.danno * 2);
             specialeUsata = true;
         } else {
             b.riceviDanni(this.danno);

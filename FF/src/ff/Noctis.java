@@ -10,6 +10,8 @@ package ff;
  */
 public class Noctis extends PersonaggioBase {
 
+    private int turniVeleno = 0;
+    private int passiMalus = 0;
     private int mana = 3000;
     private int manaMax = 3000;
     private int guil = 500;
@@ -54,6 +56,33 @@ public class Noctis extends PersonaggioBase {
         if (this.hp < 0) {
             this.hp = 0;
         }
+    }
+
+    @Override
+    public void applicaEffetto(String tipo, int valore) {
+        switch (tipo) {
+            case "VELENO" ->
+                this.turniVeleno = valore;
+            case "RALLENTA" ->
+                this.passiMalus += valore;
+            case "STAMINA_DOWN" ->
+                this.setStamina(this.getStamina() - valore);
+            case "CURA_STAMINA" -> {
+                this.setStamina(this.getStamina() + valore);
+                System.out.println("Stamina rigenerata di " + valore);
+            }
+        }
+    }
+
+    public void aggiornaStati() {
+        if (turniVeleno > 0) {
+            riceviDanni(150);
+            turniVeleno--;
+        }
+    }
+
+    public int getPassiMalus() {
+        return passiMalus;
     }
 
     public void equipaggiaBandana(Bandana b) {

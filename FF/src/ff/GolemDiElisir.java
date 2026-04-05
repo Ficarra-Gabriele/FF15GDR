@@ -17,11 +17,12 @@ public class GolemDiElisir extends Nemico {
         this.hpMax = hp;
     }
 
-    public void eseguiMossa(IEntitaDanneggiabile b) {
-        b.riceviDanni(this.danno);
-        if (!specialeUsata && b instanceof Noctis n) {
-            n.riceviDanni(n.getHpMax() * 10 / 100);
+    public void eseguiMossa(IEntitaDanneggiabile bersaglio) {
+        bersaglio.riceviDanni(this.danno);
+        if (!specialeUsata) {
+            bersaglio.applicaEffetto("VELENO", 2);
             specialeUsata = true;
         }
     }
+
 }

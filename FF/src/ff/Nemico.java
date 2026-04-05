@@ -35,4 +35,9 @@ public abstract class Nemico implements IEntitaDanneggiabile {
     public void riceviDanni(int q) {
         this.hp = Math.max(0, this.hp - q);
     }
+    @Override
+    public void applicaEffetto(String tipoEffetto, int valore) {
+        
+    }
+
 }
