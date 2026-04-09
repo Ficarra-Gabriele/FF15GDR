@@ -15,9 +15,10 @@ public class Negozio {
     private ArrayList<Oggetto> merce = new ArrayList<>();
 
     public Negozio() {
-        merce.add(new Spada("Spada Motrice", 100, 1000));
-        merce.add(new Spada("Ultima Blade", 500, 4000));
-        merce.add(new Spada("Balmung", 1200, 10000));
+
+        merce.add(new Spada("Spada Motrice", 100, 1200));
+        merce.add(new Spada("Ultima Blade", 500, 4500));
+        merce.add(new Spada("Balmung", 1200, 12000));
 
         for (int i = 0; i < 5; i++) {
             merce.add(new Pozione("HP"));
@@ -25,12 +26,15 @@ public class Negozio {
             merce.add(new Pozione("STAMINA"));
         }
 
-        for (int t = 1; t <= 5; t++) {
-            merce.add(new Bandana(t));
-        }
+        merce.add(new Bandana(1));
+        merce.add(new Bandana(2));
+        merce.add(new Bandana(3));
+        merce.add(new Bandana(4));
+        merce.add(new Bandana(5));
     }
 
     public ArrayList<Oggetto> getMerce() {
         return merce;
     }
+
 }

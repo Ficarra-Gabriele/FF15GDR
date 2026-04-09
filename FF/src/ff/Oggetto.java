@@ -4,11 +4,13 @@
  */
 package ff;
 
+import java.io.Serializable;
 /**
  *
  * @author ficarra.gabriele
  */
-public abstract class Oggetto {
+public abstract class Oggetto implements Serializable {
 
 public abstract void applicaEffetto(Noctis n);
+
 }

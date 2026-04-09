@@ -18,58 +18,79 @@ public class FileManager {
 
     public String[] elencoSalvataggi() {
         File cartella = new File(".");
-        String[] tuttiIFile = cartella.list();
-        return tuttiIFile;
+        return cartella.list((dir, name) -> name.endsWith(".ser") || name.endsWith(".csv"));
     }
 
     public void salvaPartita(Noctis n, String nomeFile) {
-        if (nomeFile.endsWith(".csv") == false) {
-            nomeFile = nomeFile + ".csv";
-        }
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(nomeFile))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(nomeFile + ".csv"))) {
+            bw.write("HP,HP_MAX,MANA,MANA_MAX,STAMINA,GUIL");
+            bw.newLine();
             bw.write(n.getHp() + "," + n.getHpMax() + "," + n.getMana() + "," + n.getManaMax() + "," + n.getStamina() + "," + n.getGuil());
-            JOptionPane.showMessageDialog(null, "Salvataggio effettuato in: " + nomeFile);
-            bw.close();
         } catch (IOException e) {
-            System.err.println("Errore scrittura file");
+            System.err.println("Errore scrittura CSV");
+        }
+
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(nomeFile + ".ser"))) {
+            oos.writeObject(n);
+            JOptionPane.showMessageDialog(null, "Salvataggio effettuato (CSV + SER): " + nomeFile);
+        } catch (IOException e) {
+            System.err.println("Errore serializzazione: " + e.getMessage());
         }
     }
 
     public Noctis selezionaECarica(Component parent) {
         String[] saves = elencoSalvataggi();
 
+        if (saves == null || saves.length == 0) {
+            JOptionPane.showMessageDialog(parent, "Nessun salvataggio trovato.");
+            return null;
+        }
+
         JList<String> listaSaves = new JList<>(saves);
-        int scelta = JOptionPane.showConfirmDialog(parent, new JScrollPane(listaSaves), "Seleziona File", JOptionPane.OK_CANCEL_OPTION);
+        int scelta = JOptionPane.showConfirmDialog(parent, new JScrollPane(listaSaves), "Seleziona file da caricare", JOptionPane.OK_CANCEL_OPTION);
 
         if (scelta == JOptionPane.OK_OPTION && listaSaves.getSelectedValue() != null) {
-            return caricaPartita(listaSaves.getSelectedValue());
+            String fileScelto = listaSaves.getSelectedValue();
+
+            if (fileScelto.endsWith(".ser")) {
+                return caricaPartitaSerializzata(fileScelto);
+            } else if (fileScelto.endsWith(".csv")) {
+                return caricaPartitaCSV(fileScelto);
+            }
         }
         return null;
     }
 
-    public Noctis caricaPartita(String nomeFile) {
-        try {
-            FileReader fr = new FileReader(nomeFile);
-            BufferedReader br = new BufferedReader(fr);
+    public Noctis caricaPartitaSerializzata(String nomeFile) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(nomeFile))) {
+            return (Noctis) ois.readObject();
+        } catch (Exception e) {
+            System.err.println("Errore caricamento SER");
+            return null;
+        }
+    }
 
+    public Noctis caricaPartitaCSV(String nomeFile) {
+        try (BufferedReader br = new BufferedReader(new FileReader(nomeFile))) {
+            br.readLine();
             String riga = br.readLine();
-            br.close();
 
             if (riga != null) {
                 String[] dati = riga.split(",");
                 Noctis n = new Noctis();
-                int hp = Integer.parseInt(dati[0]);
-                int hpMax = Integer.parseInt(dati[1]);
-                int mana = Integer.parseInt(dati[2]);
-                int manaMax = Integer.parseInt(dati[3]);
-                n.setHp(hp);
-                n.setHpMax(hpMax);
-                n.setManaMax(manaMax);
-                n.rigeneraMana(mana - n.getMana());
+                n.setHp(Integer.parseInt(dati[0]));
+                n.setHpMax(Integer.parseInt(dati[1]));
+                int manaCorrente = Integer.parseInt(dati[2]);
+                n.setManaMax(Integer.parseInt(dati[3]));
+                n.setStamina(Integer.parseInt(dati[4]));
+                n.aggiungiGuil(Integer.parseInt(dati[5]) - n.getGuil());
+
+                n.rigeneraMana(manaCorrente - n.getMana());
+
                 return n;
             }
         } catch (Exception e) {
-            System.out.println("Errore nel caricamento");
+            System.err.println("Errore caricamento CSV");
         }
         return null;
     }

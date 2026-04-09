@@ -14,13 +14,16 @@ public class Boss extends Nemico {
 
     public Boss() {
         super();
+        this.nome = "Daemon"; 
+        this.hp = 4500;
+        this.hpMax = 4500;
+        this.danno = 650;
         this.potenziamentoAttivo = false;
-        this.hpMax = hp;
     }
 
     @Override
     public void eseguiMossa(IEntitaDanneggiabile bersaglio) {
-        if (potenziamentoAttivo == true) {
+        if (potenziamentoAttivo) {
             bersaglio.riceviDanni(this.danno * 2);
             potenziamentoAttivo = false;
         } else {

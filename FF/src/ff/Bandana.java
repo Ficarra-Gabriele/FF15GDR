@@ -4,13 +4,17 @@
  */
 package ff;
 
+import java.io.Serializable;
+
+
 /**
  *
  * @author ficarra.gabriele
  */
-class Bandana extends Oggetto {
+class Bandana extends Oggetto implements Serializable{
 
-    private int tipo, prezzo;
+    private int tipo;
+    private int prezzo;
 
     public Bandana(int t) {
         this.tipo = t;

@@ -4,11 +4,13 @@
  */
 package ff;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ficarra.gabriele
  */
-class Pozione extends Oggetto {
+class Pozione extends Oggetto implements Serializable{
 
     private String tipo;
 
@@ -26,8 +28,10 @@ class Pozione extends Oggetto {
             n.setHp(n.getHp() + (n.getHpMax() * 20 / 100));
         case "MANA" -> 
             n.rigeneraMana(n.getManaMax() * 20 / 100);
-        case "STAMINA" -> 
-            n.applicaEffetto("CURA_STAMINA", 3); 
+        case "STAMINA" ->
+            n.setStamina(n.getStamina() + 3);
+        case "DIFESA" ->
+            n.dif += 220;
     }
 }
 

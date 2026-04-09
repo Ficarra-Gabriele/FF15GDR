@@ -4,11 +4,13 @@
  */
 package ff;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ficarra.gabriele
  */
-public class Noctis extends PersonaggioBase {
+public class Noctis extends PersonaggioBase implements Serializable {
 
     private int turniVeleno = 0;
     private int passiMalus = 0;

@@ -23,7 +23,7 @@ public class GameManager {
     public GameManager(Noctis n) {
         this.giocatore = n;
         this.gestoreEventi = new GestoreEventi();
-        this.passiTotali = new Random().nextInt(12, 21);
+        this.passiTotali = new Random().nextInt(18, 31);
     }
 
     public void esplora() {

@@ -15,7 +15,6 @@ public class Ardyn extends Nemico {
         this.hp = 7000;
         this.hpMax = 7000;
         this.danno = 1200;
-        this.hpMax = hp;
     }
 
     public void eseguiMossa(IEntitaDanneggiabile b) {

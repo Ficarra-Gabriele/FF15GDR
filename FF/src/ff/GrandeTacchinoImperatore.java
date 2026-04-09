@@ -12,8 +12,8 @@ public class GrandeTacchinoImperatore extends Nemico {
 
     public GrandeTacchinoImperatore() {
         this.nome = "grandetacchinoimperatore";
-        this.hp = 900;
-        this.danno = 345;
+        this.hp = 1500;
+        this.danno = 520;
         this.hpMax = hp;
     }
 

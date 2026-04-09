@@ -4,11 +4,13 @@
  */
 package ff;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ironm
  */
-public class Spada extends Oggetto {
+public class Spada extends Oggetto implements Serializable{
 
     private String nome;
     private int bonus, prezzo;

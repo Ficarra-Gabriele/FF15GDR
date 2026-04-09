@@ -12,8 +12,8 @@ public class GolemDiElisir extends Nemico {
 
     public GolemDiElisir() {
         this.nome = "golemdielisir";
-        this.hp = 1000;
-        this.danno = 352;
+        this.hp = 2200;
+        this.danno = 450;
         this.hpMax = hp;
     }
 

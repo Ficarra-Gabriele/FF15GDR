@@ -31,17 +31,36 @@ public class SchermataDiGioco extends javax.swing.JFrame {
     }
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(SchermataDiGioco.class.getName());
+
     private Noctis noctis;
     private GameManager gameManager;
     private Negozio negozio = new Negozio();
 
-    private JPanel pnlStatsEroe, pnlComandi, pnlStatsNemico, pnlDescrizione;
-    private JLabel lblHp, lblMp, lblStm, lblAtkDef, lblSteps, lblSpec, lblImmagineIncontro;
-    private JLabel lblNomeNemico, lblHpNemico;
+    private JPanel pnlStatsEroe;
+    private JPanel pnlComandi;
+    private JPanel pnlStatsNemico;
+    private JPanel pnlDescrizione;
+    private JLabel lblHp;
+    private JLabel lblMp;
+    private JLabel lblStm;
+    private JLabel lblAtkDef;
+    private JLabel lblSteps;
+    private JLabel lblSpec;
+    private JLabel lblImmagineIncontro;
+    private JLabel lblNomeNemico;
+    private JLabel lblHpNemico;
     private JTextArea txtDescrizione;
-
-    private JButton btnAtk, btnLoad, btnSpl, btnWarp, btnExp, btnSav, btnShp, btnInv;
-    private JButton btnUse, btnSell, btnBuy;
+    private JButton btnAtk;
+    private JButton btnLoad;
+    private JButton btnSpl;
+    private JButton btnWarp;
+    private JButton btnExp;
+    private JButton btnSav;
+    private JButton btnShp;
+    private JButton btnInv;
+    private JButton btnUse;
+    private JButton btnSell;
+    private JButton btnBuy;
 
     private final int H_PANEL = 220;
 
@@ -264,10 +283,20 @@ public class SchermataDiGioco extends javax.swing.JFrame {
         });
 
         btnSell.addActionListener(e -> {
+
             int i = listaGrafica.getSelectedIndex();
+
             if (i != -1) {
                 Oggetto obj = noctis.getInventario().get(i);
-                int ricavo = (obj instanceof Spada s) ? s.getPrezzo() / 2 : 150;
+                int ricavo;
+                if (obj instanceof Spada s) {
+                    ricavo = s.getPrezzo() / 2;
+                } else if (obj instanceof Bandana b) {
+                    ricavo = b.getPrezzoNegozio() / 2;
+                } else {
+                    ricavo = 150;
+                }
+
                 noctis.aggiungiGuil(ricavo);
                 noctis.getInventario().remove(i);
                 aggiornaDati();
@@ -348,6 +377,10 @@ public class SchermataDiGioco extends javax.swing.JFrame {
                     "/ff/immagini/mana.png";
                 case "pozionestamina" ->
                     "/ff/immagini/stamina.png";
+                case "pozionedifesa" ->
+                    "/ff/immagini/difesa.png";
+                case "boss" ->
+                    "/ff/immagini/boss.png";
                 case "chocobo" ->
                     "/ff/immagini/chocobo.png";
                 default ->
@@ -440,12 +473,20 @@ public class SchermataDiGioco extends javax.swing.JFrame {
     }
 
     private void aggiornaShop() {
-        modelShop.clear();
-        for (Oggetto o : negozio.getMerce()) {
-            int costo = (o instanceof Spada s) ? s.getPrezzo()
-                    : (o instanceof Bandana b ? b.getPrezzoNegozio() : 300);
 
-            modelShop.addElement(o.toString() + " - " + costo + "G");
+        modelShop.clear();
+
+        for (Oggetto o : negozio.getMerce()) {
+            int costo;
+            if (o instanceof Spada s) {
+                costo = s.getPrezzo();
+            } else if (o instanceof Bandana b) {
+                costo = b.getPrezzoNegozio();
+            } else {
+                costo = 300;
+            }
+
+            modelShop.addElement(o.toString() + " - " + costo + " Guil");
         }
     }
 

@@ -5,12 +5,13 @@
 package ff;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
 /**
  *
  * @author ficarra.gabriele
  */
-public abstract class PersonaggioBase implements IEntitaDanneggiabile {
+public abstract class PersonaggioBase implements IEntitaDanneggiabile, Serializable {
 
     protected int hp, hpMax, dif, difMax, stamina, staminaMax, danno;
     protected ArrayList<Oggetto> inventario = new ArrayList<>();

@@ -4,11 +4,13 @@
  */
 package ff;
 
+import java.io.Serializable;
+
 /**
  *
  * @author ficarra.gabriele
  */
-public abstract class Nemico implements IEntitaDanneggiabile {
+public abstract class Nemico implements IEntitaDanneggiabile, Serializable {
 
     protected String nome;
     protected int hp, hpMax, danno;

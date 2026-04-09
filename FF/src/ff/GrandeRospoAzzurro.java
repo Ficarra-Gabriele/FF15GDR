@@ -12,8 +12,8 @@ public class GrandeRospoAzzurro extends Nemico {
 
     public GrandeRospoAzzurro() {
         this.nome = "granderospoazzurro";
-        this.hp = 900;
-        this.danno = 200;
+        this.hp = 1800;
+        this.danno = 380;
         this.hpMax = hp;
     }
 

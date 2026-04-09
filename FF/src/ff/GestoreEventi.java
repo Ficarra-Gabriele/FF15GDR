@@ -38,7 +38,37 @@ public class GestoreEventi {
         if (r < 70) {
             return new Pozione("MANA");
         }
+        if (r < 80) {
+            return new Pozione("STAMINA");
+        }
+        if (r < 90) {
+            return new Pozione("DIFESA");
+        }
+        if (r <= 100) {
+            return new Boss();
+        }
 
-        return new Bandana(rand.nextInt(5) + 1);
+        return generaBandanaRara();
+    }
+
+    private Bandana generaBandanaRara() {
+        int estrazione = rand.nextInt(1000) + 1;
+
+        if (estrazione == 1000) {
+            return new Bandana(5);
+        }
+        if (estrazione > 980) {
+            return new Bandana(4);
+        }
+        if (estrazione > 947) {
+            return new Bandana(3);
+        }
+        if (estrazione > 897) {
+            return new Bandana(2);
+        }
+        if (estrazione > 797) {
+            return new Bandana(1);
+        }
+        return new Bandana(1);
     }
 }
